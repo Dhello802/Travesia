@@ -1,0 +1,33 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap');
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: 'Inter', sans-serif; background: #fafafa; min-height: 100vh; display: flex; flex-direction: column; color: #171717; }
+.hero-gradient { background: linear-gradient(135deg, #171717 0%, #262626 100%); }
+.search-card { box-shadow: 0 20px 40px -10px rgba(0,0,0,0.15); }
+.glass-nav { background: rgba(255,255,255,0.95); backdrop-filter: blur(12px); }
+.card-hover { transition: all 0.3s ease; }
+.card-hover:hover { transform: translateY(-4px); box-shadow: 0 20px 30px -10px rgba(0,0,0,0.15); }
+.social-post img { transition: transform 0.4s ease; }
+.social-post:hover img { transform: scale(1.04); }
+.pulse-dot { animation: pulse 2s infinite; }
+@keyframes pulse {
+    0% { box-shadow: 0 0 0 0 rgba(34,197,94,0.7); }
+    70% { box-shadow: 0 0 0 10px rgba(34,197,94,0); }
+    100% { box-shadow: 0 0 0 0 rgba(34,197,94,0); }
+}
+.modal-overlay { background: rgba(0,0,0,0.6); backdrop-filter: blur(4px); }
+.tab-active { color: #171717; border-bottom: 2px solid #171717; font-weight: 700; }
+.suggestions-box {
+    position: absolute; top: 100%; left: 0; right: 0; background: white;
+    border: 1px solid #e2e8f0; border-radius: 0.75rem;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.1); z-index: 30; max-height: 200px; overflow-y: auto;
+}
+.suggestion-item { padding: 0.75rem 1rem; cursor: pointer; transition: background 0.2s; }
+.suggestion-item:hover { background: #f5f5f5; }
+.countdown-number { background: #1e293b; color: white; padding: 0.3rem 0.6rem; border-radius: 0.4rem; font-weight: 700; }
+input[type="date"]::-webkit-calendar-picker-indicator { filter: invert(0.5); }
+.payment-step { display: none; }
+.payment-step.active { display: block; }
+.step-indicator { display: flex; gap: 0.5rem; margin-bottom: 1.5rem; }
+.step-dot { width: 12px; height: 12px; border-radius: 50%; background: #e2e8f0; }
+.step-dot.active { background: #171717; }
+.results-container { margin-top: 1.5rem; }

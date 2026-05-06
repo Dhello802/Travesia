@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LATAM with you - Travesía Pinolera</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="./css/styles.css">
+</head>
+<body class="flex flex-col min-h-screen">
+
+    <!-- Navegación -->
+    <nav class="glass-nav sticky top-0 z-50 border-b border-gray-200/80 shadow-sm">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-16 items-center">
+                <a href="#" onclick="navigateTo('inicio')" class="flex items-center space-x-2 no-underline">
+                    <img src="https://lh3.googleusercontent.com/d/1ROYqvo3vs0jE8pAa9OFAG9-k5r20SFil" alt="Travesía Pinolera" class="h-10 w-auto object-contain">
+                    <span class="text-xl font-bold text-gray-900">LATAM <span class="text-gray-900">with you</span></span>
+                </a>
+                <div class="hidden md:flex items-center space-x-8">
+                    <a href="#" onclick="navigateTo('explorar')" class="nav-link text-gray-600 hover:text-gray-900 font-medium transition">Explorar</a>
+                    <a href="#" onclick="navigateTo('comunidad')" class="nav-link text-gray-600 hover:text-gray-900 font-medium transition">Comunidad</a>
+                    <a href="#" onclick="navigateTo('paquetes')" class="nav-link text-gray-600 hover:text-gray-900 font-medium transition">Paquetes</a>
+                    <a href="#" onclick="navigateTo('contacto')" class="nav-link text-gray-600 hover:text-gray-900 font-medium transition">Contacto</a>
+                    <button onclick="openAuthModal()" class="bg-gray-900 text-white px-5 py-2.5 rounded-full hover:bg-black transition font-semibold shadow-md">Iniciar Sesión</button>
+                </div>
+                <div class="md:hidden">
+                    <button id="mobile-menu-btn" class="text-gray-600 text-2xl"><i class="fas fa-bars"></i></button>
+                </div>
+            </div>
+            <div id="mobile-menu" class="md:hidden hidden pb-4 space-y-2 pt-2">
+                <a href="#" onclick="navigateTo('explorar')" class="block text-gray-600 font-medium py-2">Explorar</a>
+                <a href="#" onclick="navigateTo('comunidad')" class="block text-gray-600 font-medium py-2">Comunidad</a>
+                <a href="#" onclick="navigateTo('paquetes')" class="block text-gray-600 font-medium py-2">Paquetes</a>
+                <a href="#" onclick="navigateTo('contacto')" class="block text-gray-600 font-medium py-2">Contacto</a>
+                <button onclick="openAuthModal()" class="w-full bg-gray-900 text-white py-2.5 rounded-full font-semibold">Iniciar Sesión</button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Modal de Autenticación -->
+    <div id="auth-modal" class="fixed inset-0 z-[60] hidden items-center justify-center modal-overlay">
+        <div class="bg-white rounded-2xl p-8 max-w-md w-full mx-4 shadow-2xl max-h-[90vh] overflow-y-auto">
+            <div class="flex justify-between items-center mb-6">
+                <h3 class="text-2xl font-bold text-gray-900" id="auth-title">Iniciar Sesión</h3>
+                <button onclick="closeAuthModal()" class="text-gray-400 hover:text-gray-600 text-2xl">&times;</button>
+            </div>
+            <div id="auth-form-login">
+                <div class="space-y-4">
+                    <div><label class="block text-sm font-medium text-gray-700 mb-1">Correo electrónico</label><input type="email" id="login-email" placeholder="tu@correo.com" class="w-full border rounded-lg p-3 focus:ring-2 focus:ring-blue-500 outline-none"></div>
+                    <div><label class="block text-sm font-medium text-gray-700 mb-1">Contraseña</label><input type="password" id="login-password" placeholder="••••••••" class="w-full border rounded-lg p-3 focus:ring-2 focus:ring-blue-500 outline-none"></div>
+                    <button onclick="alert('Funcionalidad backend pendiente')" class="w-full bg-gray-900 text-white py-3 rounded-lg font-bold hover:bg-black transition">Ingresar</button>
+                    <p class="text-center text-sm text-gray-500">¿No tienes cuenta? <span class="text-gray-900 cursor-pointer hover:underline" onclick="showRegister()">Regístrate</span></p>
+                </div>
+            </div>
+            <div id="auth-form-register" class="hidden">
+                <div class="space-y-4">
+                    <div><label class="block text-sm font-medium text-gray-700 mb-1">Nombre completo</label><input type="text" id="reg-name" placeholder="Juan Pérez" class="w-full border rounded-lg p-3 focus:ring-2 focus:ring-blue-500 outline-none"></div>
+                    <div><label class="block text-sm font-medium text-gray-700 mb-1">Correo electrónico</label><input type="email" id="reg-email" placeholder="tu@correo.com" class="w-full border rounded-lg p-3 focus:ring-2 focus:ring-blue-500 outline-none"></div>
+                    <div><label class="block text-sm font-medium text-gray-700 mb-1">Contraseña</label><input type="password" id="reg-password" placeholder="Mín. 8 caracteres, 1 mayúscula, 1 número" class="w-full border rounded-lg p-3 focus:ring-2 focus:ring-blue-500 outline-none"></div>
+                    <button onclick="alert('Funcionalidad backend pendiente')" class="w-full bg-gray-900 text-white py-3 rounded-lg font-bold hover:bg-black transition">Crear Cuenta</button>
+                    <p class="text-center text-sm text-gray-500">¿Ya tienes cuenta? <span class="text-gray-900 cursor-pointer hover:underline" onclick="showLogin()">Inicia sesión</span></p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Contenido dinámico -->
+    <div id="app-content" class="flex-grow"></div>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-gray-400 py-12 px-4 border-t border-gray-800 mt-auto">
+        <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-4 gap-8">
+            <div class="col-span-1 md:col-span-2">
+                <div class="flex items-center space-x-2 text-white mb-4"><img src="https://lh3.googleusercontent.com/d/1ROYqvo3vs0jE8pAa9OFAG9-k5r20SFil" alt="Travesía Pinolera" class="h-10 w-auto object-contain"><span class="text-xl font-bold">LATAM <span class="text-gray-500">with you</span></span></div>
+                <p class="text-sm max-w-sm mb-6">Agencia líder en Centroamérica. Conectamos personas con destinos inolvidables.</p>
+                <div class="flex space-x-4 text-xl"><a href="#" class="hover:text-blue-400"><i class="fab fa-facebook"></i></a><a href="#" class="hover:text-pink-400"><i class="fab fa-instagram"></i></a><a href="#" class="hover:text-red-400"><i class="fab fa-youtube"></i></a></div>
+            </div>
+            <div><h4 class="text-white font-bold mb-4 text-lg">Agencia</h4><ul class="space-y-2 text-sm"><li><a href="#" onclick="navigateTo('explorar')" class="hover:text-white transition">Explorar</a></li><li><a href="#" onclick="navigateTo('paquetes')" class="hover:text-white transition">Paquetes</a></li></ul></div>
+            <div><h4 class="text-white font-bold mb-4 text-lg">Ayuda</h4><ul class="space-y-2 text-sm"><li><a href="#" onclick="navigateTo('contacto')" class="hover:text-white transition">Centro de ayuda</a></li><li><a href="#" onclick="navigateTo('contacto')" class="hover:text-white transition">Contacto</a></li></ul></div>
+        </div>
+        <div class="max-w-7xl mx-auto border-t border-gray-800 mt-10 pt-8 text-center text-xs"><p>© 2024 LATAM with you - Travesía Pinolera. Todos los derechos reservados.</p></div>
+    </footer>
+
+    <!-- Scripts externos -->
+    <script src="./js/api.js"></script>
+    <script src="./js/main.js"></script>
+</body>
+</html>
